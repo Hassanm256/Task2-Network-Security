@@ -9,7 +9,21 @@ spec:
       app: frontend
   policyTypes:
   - Ingress
+  - Egress
   ingress:
-  - ports:
+  - from: []  # CRITICAL FIX: Allow external traffic
+    ports:
     - protocol: TCP
       port: 80
+  egress:  # CRITICAL FIX: Add egress rules
+  - to:
+    - podSelector:
+        matchLabels:
+          app: backend
+    ports:
+    - protocol: TCP
+      port: 80
+  - to: {}  # Allow DNS
+    ports:
+    - protocol: UDP
+      port: 53

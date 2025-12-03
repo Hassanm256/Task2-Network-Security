@@ -9,6 +9,7 @@ spec:
       app: db
   policyTypes:
   - Ingress
+  - Egress
   ingress:
   - from:
     - podSelector:
@@ -16,4 +17,9 @@ spec:
           app: backend
     ports:
     - protocol: TCP
-      port: 6379
+      port: 5432  # Fixed from 6379 to proper PostgreSQL port
+  egress:  # CRITICAL FIX: Add egress for DNS
+  - to: {}
+    ports:
+    - protocol: UDP
+      port: 53
