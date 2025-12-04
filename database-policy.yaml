@@ -19,7 +19,7 @@ spec:
     - protocol: TCP
       port: 5432  # Fixed from 6379 to proper PostgreSQL port
   egress:  # CRITICAL FIX: Add egress for DNS
-  - to: {}
+  - to: []
     ports:
     - protocol: UDP
       port: 53
